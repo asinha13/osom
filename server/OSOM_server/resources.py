@@ -61,7 +61,7 @@ class RGetMotivaed(Resource):
         if not resp.status_code == 200:
             return
         js = json.loads(resp.content)
-        post_list = _get_post_list(js)
+        post_list = self.get_post_list(js)
         if not post_list:
             return
         for i in xrange(MAX_TRIES):
