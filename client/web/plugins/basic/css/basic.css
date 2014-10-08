@@ -6,3 +6,13 @@
 .source {
     font-size : small;
 }
+
+.refresh {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.title {
+    font-family: Times, "Times New Roman", Georgia, sans-serif;
+    font-style: italic;
+}

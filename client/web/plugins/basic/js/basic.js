@@ -56,4 +56,8 @@ module.controller('ctrlBasic', ["$scope","svcBasic",function($scope, svcBasic) {
     $scope.set_refresh_rate = function(rate) {
         svcBasic.set_refresh_rate();
     };
+
+    $scope.refresh = function() {
+        svcBasic.get_new_osom();
+    };
 }]);

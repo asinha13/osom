@@ -24,12 +24,15 @@
   <body data-ng-app="OSOMBasicApp">
     <div class="container-fluid mainframe"
          data-ng-controller="ctrlBasic">
-      <div class="row">
-        <h1>{{osom.title}}</h1>
+      <div class="row title refresh"
+           data-ng-click="refresh()">
+        <h1><strong>{{osom.title}}</strong></h1>
       </div>
       <br>
       <div class="row">
-        <img data-ng-src="{{osom.url}}"/>
+        <img class="refresh"
+             data-ng-click="refresh()"
+             data-ng-src="{{osom.url}}"/>
       </div>
       <div class="row source"
            data-ng-show="osom.source">
