@@ -2,6 +2,7 @@ from OSOM_server.resources_base import Resource
 import json
 from  OSOM_server import reddit_base as reddit
 from  OSOM_server import utils
+import logging as log
 
 MAX_TRIES = 10
 
@@ -17,9 +18,9 @@ class RGetMotivaed(Resource):
     @property
     def url(self):
         """
-        return the top 100 posts from /r/getmotivated in json format
+        return the top 500 posts from /r/getmotivated in json format
         """
-        return "http://www.reddit.com/r/getmotivated.json?limit=100"
+        return "http://www.reddit.com/r/getmotivated.json?limit=500"
 
     def get_post_list(self,js):
         try:
@@ -35,7 +36,7 @@ class RGetMotivaed(Resource):
         if post.get("is_self"):
             return False
         # False if domain not imgur
-        if post.get("domain") != "i.imgur.com":
+        if "imgur" not in post.get("domain"):
             return False
         # False if no url
         url = post.get('url')
@@ -46,33 +47,48 @@ class RGetMotivaed(Resource):
             return False
         return True
 
-    def curate(self,url):
+    def curate_url(self,url):
         if not url:
             return
         # loose test to make sure the url ends with an image extension
         last_part = url.split('/')[-1]
-        sp = last_part('.')
+        sp = last_part.split('.')
         if len(sp) == 1:
             url += '.jpg'
         return url
 
+    def curate_title(self,title):
+        if not title:
+            return
+        title = title.strip('[image]')
+        title = title.strip('[Image]')
+        return title
+
     def get_one(self):
         resp = reddit.make_get_request(self.url)
+        log.debug("Response from %s : %d"%(self.url,resp.status_code))
         if not resp.status_code == 200:
             return
         js = json.loads(resp.content)
         post_list = self.get_post_list(js)
         if not post_list:
+            log.warning("No list obtained from %s"%(self.url))
             return
         for i in xrange(MAX_TRIES):
             post = utils.pick_one_random_item(post_list)
-            if not self.publishable(post):
+            post_data = post.get('data')
+            if not post_data:
                 continue
-            img_url = self.curate(post.get("url"))
+            if not self.publishable(post_data):
+                continue
+            img_url = self.curate_url(post_data.get("url"))
             if not img_url:
                 continue
-            return {"title" : post.get("title"),
+            title = self.curate_title(post_data.get("title"))
+            if not title:
+                continue
+            return {"title" : title,
                     "url" : img_url,
-                    "author" : post.get("author")}
+                    "source" : "http://www.reddit.com"+post_data.get("permalink")}
 
 RESOURCES = [RGetMotivaed()]
