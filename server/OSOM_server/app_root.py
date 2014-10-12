@@ -5,7 +5,10 @@ import json
 import logging as log
 
 level = log.INFO
-log.basicConfig(filename="/var/log/webapi.log",level=level,format='%(asctime)s %(levelname)s %(message)s')
+
+_logfile = utils.get_logfile()
+
+log.basicConfig(filename=_logfile,level=level,format='%(asctime)s %(levelname)s %(message)s')
 
 urls = (
     '/',  'Root',
@@ -40,11 +43,13 @@ class Root(object):
         log.warning("No publishable item found")
         raise web.NotFound()
 
-app = web.application(urls, globals())
+class OSOMApp(web.application):
+    def run(self,ip,port, *middleware):
+        func = self.wsgifunc(*middleware)
+        return web.httpserver.runsimple(func, (ip,port))
 
-def start():
+app = OSOMApp(urls,globals())
+
+def start(ip='127.0.0.1',port=9000):
     log.info("Starting osom-api server")
-    app.run()
-
-if __name__ == "__main__":
-    start()
+    app.run(ip,port)
