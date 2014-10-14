@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 import sys, subprocess
 
 setup(name="osom-server",
@@ -12,7 +12,11 @@ setup(name="osom-server",
         ('/etc/nginx/conf.d/nginx-osom/',['nginx/conf.d/nginx-osom/nginx-osom-api.conf']),
         ('/etc/nginx/sites-enabled/',['nginx/sites-enabled/default']),
         ('/etc/init.d',['etc/init.d/osom-server'])
-      ]
+      ],
+      install_requires=[
+        "web.py",
+        "requests"
+        ]
      )
 
 LOGDIR = "/var/log/osom-server"
