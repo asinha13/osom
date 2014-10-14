@@ -23,5 +23,5 @@ LOGDIR = "/var/log/osom-server"
 
 if "install" in sys.argv:
     subprocess.call(['mkdir','-p',LOGDIR])
-    subprocess.call(['chown','admin:admin',LOGDIR])
+    subprocess.call(['chown','osom-admin:osom-admin',LOGDIR])
     subprocess.call(['update-rc.d','osom-server','defaults'])

@@ -8,6 +8,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 apt-get install -y nginx
+apt-get install -y python-setuptools
 
 install_pkg () {
     f=$1
