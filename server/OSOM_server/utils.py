@@ -3,7 +3,7 @@ from random import random
 _logfile = "/var/log/osom-server/osomapi.log"
 
 def _get_random_index(num):
-    return int(random()*num)
+    return int(round(random()*num))
 
 def pick_one_random_item(lst):
     """

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          osom
+# Provides:          osom_server
 # Required-Start:    $local_fs $remote_fs $network $syslog $named
 # Required-Stop:     $local_fs $remote_fs $network $syslog $named
 # Default-Start:     2 3 4 5
@@ -12,8 +12,6 @@
 
 # Author: Ambuj Sinha <ambujs.app@gmail.com>
 
-logger step1
-
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="OSOM api Server"
@@ -21,8 +19,6 @@ NAME=osom-server
 DAEMON=/usr/bin/$NAME
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
-
-logger step2
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
@@ -34,8 +30,6 @@ logger step2
 # Depend on lsb-base (>= 3.2-14) to ensure that this file is present
 # and status_of_proc is working.
 . /lib/lsb/init-functions
-
-logger step1logger step3
 
 #
 # Function that starts the daemon/service

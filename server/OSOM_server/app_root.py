@@ -19,7 +19,7 @@ class Root(object):
     def publishable(self,item):
         if not isinstance(item,dict):
             return False
-        req_keys = ['title','url','source']
+        req_keys = ['url','source']
         for key in req_keys:
             if key not in item:
                 log("%s not in %r"%(key,item))
@@ -33,6 +33,7 @@ class Root(object):
         """
         log.debug("Servicing GET request")
         resource = utils.pick_one_random_item(RESOURCES)
+        log.info("Picked %r"%resource.name)
         if not resource:
             log.debug("No resource Found(1)")
             raise web.NotFound()
