@@ -3,8 +3,19 @@
     margin-top: 20px;
 }
 
-.source {
+.image {
+    max-width:100%;
+    max-height:90%;
+}
+
+.small-text {
     font-size : small;
+    font-family: Times, "Times New Roman", Georgia, sans-serif;
+}
+
+.xtra-small-text {
+    font-size : xx-small;
+    font-family: Times, "Times New Roman", Georgia, sans-serif;
 }
 
 .refresh {
@@ -12,7 +23,7 @@
     cursor: hand;
 }
 
-.title {
-    font-family: Times, "Times New Roman", Georgia, sans-serif;
-    font-style: italic;
+.subtitle {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: large;
 }

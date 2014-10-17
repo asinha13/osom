@@ -24,18 +24,24 @@
   <body data-ng-app="OSOMBasicApp">
     <div class="container-fluid mainframe"
          data-ng-controller="ctrlBasic">
-      <div class="row title refresh"
-           data-ng-click="refresh()">
-        <h1><strong>{{osom.title}}</strong></h1>
+      <div class="row xtra-small-text">
+        CLICK ON IMAGE TO GET THE NEXT SERVING OF MOTIVATION...
       </div>
       <br>
-      <div class="row">
-        <img class="refresh"
+      <div class="row"
+           data-ng-cloak>
+        <img class="refresh image"
              data-ng-click="refresh()"
              data-ng-src="{{osom.url}}"/>
       </div>
-      <div class="row source"
-           data-ng-show="osom.source">
+      <div class="row subtitle"
+           data-ng-show="osom.subtitle"
+           data-ng-cloak>
+        <strong>{{osom.subtitle}}</strong>
+      </div>
+      <div class="row small-text"
+           data-ng-show="osom.source"
+           data-ng-cloak>
         <a target="_blank" href="{{osom.source}}">source</a>
       </div>
     </div>
