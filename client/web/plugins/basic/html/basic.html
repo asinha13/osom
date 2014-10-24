@@ -35,9 +35,8 @@
              data-ng-src="{{osom.url}}"/>
       </div>
       <div class="row subtitle"
-           data-ng-show="osom.subtitle"
-           data-ng-cloak>
-        <strong>{{osom.subtitle}}</strong>
+           data-ng-show="osom.subtitle">
+        <strong data-ng-cloak>{{osom.subtitle}}</strong>
       </div>
       <div class="row small-text"
            data-ng-show="osom.source"
@@ -56,5 +55,18 @@
     <!-- Include AngularJS -->
     <script src="/libraries/angular/js/angular.min.js"></script>
     <script type="application/javascript" src="/basic/js/basic.js"></script>
+
+    <!-- Google Analytics Tracking script-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-55729649-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+
   </body>
 </html>

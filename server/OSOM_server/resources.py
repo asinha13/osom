@@ -35,6 +35,8 @@ class RGetMotivaed(Resource):
         # False if self post
         if post.get("is_self"):
             return False
+        if post.get("ups") < 5:
+            return False
         # False if domain not imgur
         if "imgur" not in post.get("domain"):
             return False
